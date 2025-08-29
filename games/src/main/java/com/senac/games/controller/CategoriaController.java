@@ -1,0 +1,31 @@
+package com.senac.games.controller;
+
+import com.senac.games.entity.Categoria;
+import com.senac.games.service.CategoriaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("api/categoria")
+@Tag(name = "Categoria", description = "API para gerenciamento das categorias")
+public class CategoriaController {
+
+    private CategoriaService categoriaService;
+
+    public CategoriaController(CategoriaService categoriaService) {
+        this.categoriaService = categoriaService;
+    }
+
+    @GetMapping("/listar")
+    @Operation(summary = "listar categorias", description = "endpoint para listar todas as categorias")
+    public ResponseEntity<List<Categoria>> listarCategorias(){
+        return ResponseEntity.ok(categoriaService.listarCategorias());
+    }
+
+}
